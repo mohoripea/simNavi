@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>格安SIM比較アプリ</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>📱 格安SIMプラン 一覧</h1>
+    <button>追加</button>
+    <table>
+        <thead>
+            <tr>
+                <th>SIM名</th>
+                <th>プラン名</th>
+                <th>回線</th>
+                <th>容量 (GB)</th>
+                <th>月額料金 (円)</th>
+                <th>データ繰越</th>
+                <th>家族割</th>
+                <th>詳細</th>
+                <th>更新</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="plan : ${plans}">
+                <td th:text="${plan.simName}">A社モバイル</td>
+                <td th:text="${plan.planName}">スタンダード10GB</td>
+                <td th:text="${plan.carrier}">Docomo</td>
+                <td th:text="${plan.dataCapacity}">10</td>
+                <td th:text="${plan.monthlyFee}">1980</td>
+                <td th:text="${plan.dataRollover ? '✅' : '❌'}">✅</td> 
+                <td th:text="${plan.familyDiscount ? '✅' : '❌'}">❌</td>
+                <td><a href="#" th:href="@{'/plans/' + ${plan.id}}">詳細を見る</a></td>
+                <td><a th:href="@{/plan_list/delete/{id}(id=${plan.id} )}" 
+                onclick="return confirm('本当に削除しますか?');">削除</a></td>
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>
