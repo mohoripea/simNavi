@@ -40,14 +40,7 @@
                 <td th:text="${plan.dataRollover ? '✅' : '❌'}">✅</td> 
                 <td th:text="${plan.familyDiscount ? '✅' : '❌'}">❌</td>
                 <td><a href="#" th:href="@{'/plans/' + ${plan.id}}">詳細を見る</a></td>
-                <td>
-				  <form th:action="@{/plan_list/delete/{id}(id=${plan.id} )}" 
-          			method="post" 
-          			onsubmit="return confirm('本当に削除しますか？');" 
-          			style="display:inline;">
-        			  <button type="submit">削除</button>
-    			  </form>
-				</td>
+                <td><a th:href="@{/plan_list/update/{id}(id=${plan.id} )}" >更新</a></td>
             </tr>
         </tbody>
     </table>

@@ -54,4 +54,14 @@ public class MobilePlanController {
     	mobilePlanService.delete(id);
     	return "redirect:/plan_list";
     }
+    
+    @GetMapping("/plan_list/update/{id}")
+    public String updatePlan(@PathVariable Long id, Model model) {
+    	MobilePlan mobilePlan = mobilePlanRepository.findById(id)
+    			.orElseThrow(() -> new IllegalArgumentException("Invalid plan Id:" + id));
+    	model.addAttribute("mobilePlan", mobilePlan);
+    	
+    	return "update";
+    }
+    
 }

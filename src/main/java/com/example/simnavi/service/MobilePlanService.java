@@ -27,6 +27,7 @@ public class MobilePlanService {
 		mobilePlan.setMonthlyFee(mobilePlanForm.getMonthlyFee());
 		mobilePlan.setDataRollover(mobilePlanForm.isDataRollover());
 		mobilePlan.setFamilyDiscount(mobilePlanForm.isFamilyDiscount());
+		mobilePlan.setOfficialUrl(mobilePlanForm.getOfficialUrl());
 		
 		mobilePlan.setInitialCost(null);
 	    mobilePlan.setCallCharge("非表示/N/A");
@@ -44,4 +45,8 @@ public class MobilePlanService {
 	public void delete(Long id) {
 		mobilePlanRepository.deleteById(id);
 	}
+	
+//	public MobilePlan updatePlan(Long id) {
+//	
+//	}
 }
