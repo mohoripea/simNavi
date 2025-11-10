@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.simnavi.form.MobilePlanForm;
 import com.example.simnavi.model.MobilePlan;
 import com.example.simnavi.repository.MobilePlanRepository;
 import com.example.simnavi.service.MobilePlanService;
@@ -34,7 +36,20 @@ public class MobilePlanController {
         return "plan_list"; 
     }
     
-    @GetMapping("/plan_list/delete/{id}")
+    @GetMapping("/plan_list/register")
+    public String registerPlan(Model model) {
+    	model.addAttribute("mobilePlanForm", new MobilePlanForm());
+    	return "register";
+    }
+    
+    @PostMapping("/plan_list/register/complete")
+    public String registeredPlan(Model model, MobilePlanForm mobilePlanForm) {
+    	mobilePlanService.createPlan(mobilePlanForm);
+    	
+    	return "redirect:/plan_list";
+    }
+    
+    @PostMapping("/plan_list/delete/{id}")
     public String deleteSimInformation(@PathVariable Long id) {
     	mobilePlanService.delete(id);
     	return "redirect:/plan_list";

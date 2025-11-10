@@ -12,8 +12,10 @@
     </style>
 </head>
 <body>
-    <h1>📱 格安SIMプラン 一覧</h1>
-    <button>追加</button>
+    <h1>格安SIMプラン 一覧</h1>
+	<a th:href="@{/plan_list/register}">
+  	  <button type="submit">追加</button>
+	</a>
     <table>
         <thead>
             <tr>
@@ -38,8 +40,14 @@
                 <td th:text="${plan.dataRollover ? '✅' : '❌'}">✅</td> 
                 <td th:text="${plan.familyDiscount ? '✅' : '❌'}">❌</td>
                 <td><a href="#" th:href="@{'/plans/' + ${plan.id}}">詳細を見る</a></td>
-                <td><a th:href="@{/plan_list/delete/{id}(id=${plan.id} )}" 
-                onclick="return confirm('本当に削除しますか?');">削除</a></td>
+                <td>
+				  <form th:action="@{/plan_list/delete/{id}(id=${plan.id} )}" 
+          			method="post" 
+          			onsubmit="return confirm('本当に削除しますか？');" 
+          			style="display:inline;">
+        			  <button type="submit">削除</button>
+    			  </form>
+				</td>
             </tr>
         </tbody>
     </table>
